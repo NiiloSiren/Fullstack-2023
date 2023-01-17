@@ -47,7 +47,7 @@ const App = () => {
       <Statistics bad={"bad "+bad} />
       <Statistics all={"all "+(good+neutral+bad)} />
       <Statistics average={"average "+(good+bad*-1)/(bad+neutral+good)} />
-      <Statistics positive={"positive "+(good)/(bad+neutral+good)} />
+      <Statistics positive={"positive "+100*(good)/(bad+neutral+good)+"%"} />
 
     </div>
   )
