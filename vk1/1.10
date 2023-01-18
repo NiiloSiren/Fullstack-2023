@@ -1,0 +1,76 @@
+import { useState } from 'react'
+
+const StatisticLine = (props) => {
+  return(
+    <div>
+      {props.text}
+  {props.value}
+  {props.text1}
+  {props.good}
+  {props.neutral}
+  {props.bad}
+  
+  </div>
+  )
+}
+
+const Statistics = (props) => {
+    
+  return(
+      <div>
+        <StatisticLine text="good " value = {props.good}/>
+        <StatisticLine text="neutral " value = {props.neutral}/>
+        <StatisticLine text="bad " value = {props.bad}/>
+        <StatisticLine text="all " value = {props.good+props.neutral+props.bad}/>
+        <StatisticLine text="average " value = {(props.good+props.bad*-1)/(props.good+props.neutral+props.bad)}/>
+        <StatisticLine text="average " value = {100*(props.good)/(props.good+props.neutral+props.bad)} text1 = "%"/>
+      </div>
+    )
+}
+
+const Button = (props) => (
+        <button onClick={props.HandleClick}>
+          {props.text}
+        </button>
+)
+
+const App = () => {
+  // tallenna napit omaan tilaansa
+  const [good, setGood] = useState(0)
+  const [neutral, setNeutral] = useState(0)
+  const [bad, setBad] = useState(0)
+  const Header = "Statistics"
+
+  if (good+neutral+bad > 0) {
+    return (
+      <div>
+        <h1>Give Feedback</h1>
+
+        <Button HandleClick={() => setGood(good + 1)}text="Good"/>
+        <Button HandleClick={() => setNeutral(neutral + 1)}text="Neutral"/>  
+        <Button HandleClick={() => setBad(bad + 1)}text="Bad"/>
+        
+        <h1>Statistics</h1>
+        <Statistics good={good} neutral={neutral} bad={bad}/>
+
+      </div>
+    )
+    
+  }
+  if (good+bad+neutral <= 0){
+    return (
+      <div>
+        <h1>Give Feedback</h1>
+
+        <Button HandleClick={() => setGood(good + 1)}text="Good"/>
+        <Button HandleClick={() => setNeutral(neutral + 1)}text="Neutral"/>  
+        <Button HandleClick={() => setBad(bad + 1)}text="Bad"/>
+
+        <h2>No statistics yet</h2>
+      </div>
+    )
+  }
+  
+}
+
+export default App
